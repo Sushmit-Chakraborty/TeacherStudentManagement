@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css_style %}
+<link rel="stylesheet" href="/static/css/homePage.css">
+{% endblock %}
+{% block header %}
+<a href="{% url 'logoutPage' %}" class="nav-link right">Logout</a>
+{% endblock %}
+
+{% block content %}
+<div class="background-images">
+    <div class="container" style=" margin-top: 100px;">
+        <div class="row justify-content-center">
+            <div class="col-md-6" style="margin-top: 80px;">
+                <div class="card">
+                    <div class="card-body text-center" style="background-color:rgb(199, 194, 194);">
+                        <h3 class="card-title">Hello {{ student_name }}</h3>
+                        <p>Click below to see your result</p>
+                        <a href="{% url 'resultPage'  %}" class="btn btn-success">Result</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

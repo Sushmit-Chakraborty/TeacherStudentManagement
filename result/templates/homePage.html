@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_style %}
+<link rel="stylesheet" href="/static/css/homePage.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="background-container"></div>
+
+<h1 style="text-align: center; margin-top: 59px;color: solid black" >Welcome To S.O. School</h1>
+<h5 style="text-align: center;font-weight: bold;">Please login to proceed further</h5>
+<div style="text-align: center; margin-top: 20px;">
+    <a href="{% url 'loginPage' %}"class="button">Login</a>
+    <a href="{% url 'signupPage' %}" class="button">Sign Up</a>
+</div>
+
+
+
+{% endblock %}

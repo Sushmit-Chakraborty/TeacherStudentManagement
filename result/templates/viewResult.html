@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css_style %}
+<link rel="stylesheet" href="/static/css/homePage.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{% endblock %}
+
+{% block header %}
+<a href="{% url 'teacherPage' %}" class="nav-link left" >Home</a>
+<a href="{% url 'logoutPage' %}" class="nav-link right">Logout</a>
+{% endblock %}
+
+
+{% block content %}
+<div class="background-images"></div>
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1" style="color: white;">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}" style="color: white;">previous</a>
+        {% endif %}
+
+        <span class="current" style="color: whitesmoke;">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" style="color: white;">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" style="color: white;">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+<div style="display:flex; justify-content: center;">
+    <table style="border-collapse: collapse; width: 80%; margin-top: 20px; border: 2px solid #000;">
+        <thead style="background-color: #f8f9fa;">
+            <tr>
+                <th style="border: 2px solid #000; padding: 8px; background-color: #c7ecee;">Full Name</th>
+                <th style="border: 2px solid #000; padding: 8px; background-color: #c7ecee;">Email</th>
+                <th style="border: 2px solid #000; padding: 8px; background-color: #c7ecee;">English</th>
+                <th style="border: 2px solid #000; padding: 8px; background-color: #c7ecee;">Bengali</th>
+                <th style="border: 2px solid #000; padding: 8px; background-color: #c7ecee;">Mathematics</th>
+                <th style="border: 2px solid #000; padding: 8px; background-color: #c7ecee;">Science</th>
+                <th style="border: 2px solid #000; padding: 8px; background-color: #c7ecee;">Programming</th>
+                <th style="border: 2px solid #000; padding: 8px; background-color: #c7ecee;">Environment</th>
+                <th style="border: 2px solid #000; padding: 8px; background-color: #c7ecee;">Total Marks</th>
+                <th style="border: 2px solid #000; padding: 8px; background-color: #c7ecee;">Rank</th>
+                <th style="border: 2px solid #000; padding: 8px; background-color: #c7ecee;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in page_obj %}
+            <tr style="border: 2px solid #000;">
+                <td style="border: 2px solid #000; padding: 8px; background-color: #f4f6f9;">{{ data.email.username }}</td>
+                <td style="border: 2px solid #000; padding: 8px; background-color: #f4f6f9;">{{ data.email.email }}</td>
+                <td style="border: 2px solid #000; padding: 8px; background-color: #f4f6f9;">{{ data.english }}</td>
+                <td style="border: 2px solid #000; padding: 8px; background-color: #f4f6f9;">{{ data.bengali }}</td>
+                <td style="border: 2px solid #000; padding: 8px; background-color: #f4f6f9;">{{ data.mathematics }}</td>
+                <td style="border: 2px solid #000; padding: 8px; background-color: #f4f6f9;">{{ data.science }}</td>
+                <td style="border: 2px solid #000; padding: 8px; background-color: #f4f6f9;">{{ data.programming }}</td>
+                <td style="border: 2px solid #000; padding: 8px; background-color: #f4f6f9;">{{ data.environment }}</td>
+                <td style="border: 2px solid #000; padding: 8px; background-color: #f4f6f9;">{{ data.calculate_total }}</td>
+                <td style="border: 2px solid #000; padding: 8px; background-color: #f4f6f9;">{{ data.rank }}</td>
+                <td style="border: 2px solid #000; padding: 8px; background-color: #f4f6f9;">
+                    <a href="{% url 'updatepage' data.pk %}"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'deletepage' data.pk %}"><i class="fas fa-trash-alt"></i></a>
+
+                    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}
+
+

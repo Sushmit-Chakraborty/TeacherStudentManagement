@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css_style %}
+<link rel="stylesheet" href="/static/css/homePage.css">
+{% endblock %}
+
+{% block header %}
+<a href="{% url 'teacherPage' %}" class="nav-link left" >Home</a>
+<a href="{% url 'logoutPage' %}" class="nav-link right">Logout</a>
+{% endblock %}
+
+{% block content %}
+<div class="background-images"></div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10" style="background-color: darkgray;border-radius: 8px;">
+            <h5 class="card-title" style="margin-bottom: 10px;margin-top: 8px;">Please enter all the details</h5>
+            <div class="card">
+                <div class="card-body">     
+                    {% if error_message %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error_message }}
+                    </div>
+                    {% endif %}              
+                    <form action="{% url 'viewdata' %}" method="POST" onsubmit="return validateForm()">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Email">Email</label>
+                                    <input type="text" class="form-control" name="Email" required="True">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="English">English</label>
+                                    <input type="text" class="form-control" id="English" name="English" required="True">
+                                   
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Bengali">Bengali</label>
+                                    <input type="text" class="form-control" id="Bengali" name="Bengali" required="True">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Mathematics">Mathematics</label>
+                                    <input type="text" class="form-control" id="Mathematics" name="Mathematics" required="True">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Science">Science</label>
+                                    <input type="text" class="form-control" id="Science" name="Science" required="True">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Programming">Programming</label>
+                                    <input type="text" class="form-control" id="Programming" name="Programming" required="True">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Environment">Environment</label>
+                                    <input type="text" class="form-control" id="Environment" name="Environment" required="True">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-right" style="margin-top: 30px; margin-left: 700px;" required="True">
+                            <input type="submit" class="btn btn-primary mr-2">
+                            <input type="reset" class="btn btn-secondary" value="Reset">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function validateForm() {
+        var english = parseInt(document.getElementById('English').value);
+        var bengali = parseInt(document.getElementById('Bengali').value);
+        var mathematics = parseInt(document.getElementById('Mathematics').value);
+        var science = parseInt(document.getElementById('Science').value);
+        var programming = parseInt(document.getElementById('Programming').value);
+        var environment = parseInt(document.getElementById('Environment').value);
+
+        if (english > 100 || bengali > 100 || mathematics > 100 || science > 100 || programming > 100 || environment > 100) {
+            alert("Marks should not be greater than 100")
+            return false;
+        } else {
+            
+            return true;
+        }
+    }
+</script>
+
+{% endblock %}
