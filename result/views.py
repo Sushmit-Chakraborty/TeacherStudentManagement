@@ -186,4 +186,4 @@ def sendmail(request):
         [student_email],  # to-mail
         fail_silently=False,
     )
-    return render(request,'studentPAge.html')
+    return render(request,'studentPage.html')
